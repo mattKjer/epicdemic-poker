@@ -1,3 +1,3 @@
 module.exports = {
-  mongoURI: 'mongodb://YOUR_MONGO_URI'
+  mongoURI: 'mongodb://epidemic:epicdemic1@ds121652.mlab.com:21652/kander-test'
 };
