@@ -25,8 +25,8 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   Point.findByIdAndUpdate(req.params.id, { points: req.body.points })
-    .then(() => res.json({ success: true })
-    .catch(err => res.status(404).json({ success: false })));
+    .then(() => res.json({ success: true }))
+    .catch(err => res.status(404).json({ success: false }));
 });
 
 module.exports = router;
