@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const items = require('./routes/api/items');
+const points = require('./routes/api/points');
 
 const app = express();
 
@@ -20,7 +21,10 @@ mongoose
   .catch(err => console.log(err));
 
 // Use Routes
+// Anything routed to /api/items will use this path and the items object passed into it.
+// you can also use app.use('/api/points', points)
 app.use('/api/items', items);
+app.use('/api/points', points);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
