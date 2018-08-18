@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
 
-import socketIOClient from 'socket.io-client'
+import socketIOClient from 'socket.io-client';
+
+const socket = socketIOClient("http://localhost:5000");
+
 
 export const getItems = () => dispatch => {
   dispatch(setItemsLoading());
@@ -20,7 +23,6 @@ export const addItem = item => dispatch => {
       payload: res.data
     })
   ).then(() => {
-    const socket = socketIOClient("http://localhost:5000");
     socket.emit('pointsUpdated');
   });
 };
@@ -31,7 +33,9 @@ export const deleteItem = id => dispatch => {
       type: DELETE_ITEM,
       payload: id
     })
-  );
+  ).then(() => {
+    socket.emit('pointsUpdated');
+  });
 };
 
 export const setItemsLoading = () => {
