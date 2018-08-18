@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
 
+import socketIOClient from 'socket.io-client'
+
 export const getItems = () => dispatch => {
   dispatch(setItemsLoading());
   axios.get('/api/items').then(res =>
@@ -17,7 +19,10 @@ export const addItem = item => dispatch => {
       type: ADD_ITEM,
       payload: res.data
     })
-  );
+  ).then(() => {
+    const socket = socketIOClient("http://localhost:5000");
+    socket.emit('pointsUpdated');
+  });
 };
 
 export const deleteItem = id => dispatch => {

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
+import socketIOClient from 'socket.io-client'
+
 class ShoppingList extends Component {
   componentDidMount() {
     this.props.getItems();
@@ -15,6 +17,14 @@ class ShoppingList extends Component {
   };
 
   render() {
+
+    const socket = socketIOClient("http://localhost:5000");
+    socket.on('connect', () => {console.log('I connected on client')});
+    socket.on('updatePoints', () => {
+      console.log('fetching items from shopping list');
+      this.props.getItems()
+    });
+
     const { items } = this.props.item;
     return (
       <Container>

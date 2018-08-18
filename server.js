@@ -8,6 +8,15 @@ const points = require('./routes/api/points');
 
 const app = express();
 
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+  socket.on('pointsUpdated', () => {
+    socket.broadcast.emit('updatePoints');
+  });
+});
+
 // Bodyparser Middleware
 app.use(bodyParser.json());
 
@@ -26,6 +35,11 @@ mongoose
 app.use('/api/items', items);
 app.use('/api/points', points);
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
@@ -38,4 +52,4 @@ if (process.env.NODE_ENV === 'production') {
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+server.listen(port, () => console.log(`Server started on port ${port}`));
