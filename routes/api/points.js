@@ -12,6 +12,14 @@ router.get('/', (req, res) => {
     .then(points => res.json(points));
 });
 
+router.post('/newgame/:id', (req, res) => {
+  const newGame = new Point({
+    teamName: req.params.id
+  });
+  newGame.save().then(game => res.json(game))
+  .catch(err => res.status(404).json({ success: false, error: err }));;
+});
+
 // @route   POST api/points
 // @desc    Create An Point
 // @access  Public
@@ -38,13 +46,19 @@ router.put('/:id', (req, res) => {
   Point.findById('5b79600a4654dd0ee4f21bf6')
     .then(item => {
       const subDoc = item.points.id('5b797761bf2ef11ad1a66e3b');
-      subDoc.point = 33;
+      subDoc.point = 45;
+
+      const total = item.points
+                    .filter(e => e.point >=0)
+                    .reduce((accumulator, amount) => accumulator + amount.point, 0);
+
+      item.totalPoints = total;
       item.save(function (err) {
         console.log(err) // #sadpanda
       });
     })
-      .then(() => res.json({ success: true }))
-        .catch(err => res.status(404).json({ success: false, error: err }));
+    .then(() => res.json({ success: true }))
+    .catch(err => res.status(404).json({ success: false, error: err }));
 });
 
 module.exports = router;

@@ -22,7 +22,7 @@ class ShoppingList extends Component {
     socket.on('connect', () => {console.log('I connected on client')});
     socket.on('updatePoints', () => {
       console.log('fetching items from shopping list');
-      this.props.getItems()
+      this.props.getItems();
     });
 
     const { items } = this.props.item;
