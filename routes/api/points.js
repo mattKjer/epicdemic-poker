@@ -12,6 +12,14 @@ router.get('/', (req, res) => {
     .then(points => res.json(points));
 });
 
+// @route   GET api/points/:teamname
+// @desc    Get All Points for a specific game
+// @access  Public
+router.get('/:id', (req, res) => {
+  Point.find({teamName: req.params.id})
+    .then(points => res.json(points));
+});
+
 router.post('/newgame/:id', (req, res) => {
   const newGame = new Point({
     teamName: req.params.id
