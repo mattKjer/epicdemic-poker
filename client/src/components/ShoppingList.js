@@ -27,6 +27,7 @@ class ShoppingList extends Component {
 
     return (
       <Container>
+        {totalPoints && `Total points: ${totalPoints}`}
         <ListGroup>
           <TransitionGroup className="shopping-list">
             {points && points.map(point => (
