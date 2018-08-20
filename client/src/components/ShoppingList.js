@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { getItems, deleteItem } from '../actions/itemActions';
+import { getPoints, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
 import socketIOClient from 'socket.io-client'
 
 class ShoppingList extends Component {
   componentDidMount() {
-    this.props.getItems();
+    this.props.getPoints();
   }
 
   onDeleteClick = id => {
@@ -53,7 +53,7 @@ class ShoppingList extends Component {
 }
 
 ShoppingList.propTypes = {
-  getItems: PropTypes.func.isRequired,
+  getPoints: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired
 };
 
@@ -63,5 +63,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getItems, deleteItem }
+  { getPoints, deleteItem }
 )(ShoppingList);

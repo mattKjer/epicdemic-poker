@@ -1,5 +1,5 @@
 import {
-  GET_ITEMS,
+  GET_POINTS,
   ADD_ITEM,
   DELETE_ITEM,
   ITEMS_LOADING
@@ -12,7 +12,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_ITEMS:
+    case GET_POINTS:
       return {
         ...state,
         items: action.payload,

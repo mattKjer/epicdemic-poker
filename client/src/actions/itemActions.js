@@ -1,16 +1,16 @@
 import axios from 'axios';
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
+import { GET_POINTS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types';
 
 import socketIOClient from 'socket.io-client';
 
 const socket = socketIOClient("http://localhost:5000");
 
 
-export const getItems = () => dispatch => {
+export const getPoints = () => dispatch => {
   dispatch(setItemsLoading());
-  axios.get('/api/items').then(res =>
+  axios.get('/api/game').then(res =>
     dispatch({
-      type: GET_ITEMS,
+      type: GET_POINTS,
       payload: res.data
     })
   );
