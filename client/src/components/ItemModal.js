@@ -15,7 +15,7 @@ import { addItem } from '../actions/itemActions';
 class ItemModal extends Component {
   state = {
     modal: false,
-    name: ''
+    points: 0
   };
 
   toggle = () => {
@@ -32,7 +32,7 @@ class ItemModal extends Component {
     e.preventDefault();
 
     const newItem = {
-      name: this.state.name
+      points: this.state.points
     };
 
     // Add item via addItem action
@@ -54,20 +54,20 @@ class ItemModal extends Component {
         </Button>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Add To Shopping List</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Point Story</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="item">Item</Label>
+                <Label for="item">Point</Label>
                 <Input
                   type="text"
-                  name="name"
-                  id="item"
-                  placeholder="Add shopping item"
+                  name="points"
+                  id="points"
+                  placeholder="Add or update point"
                   onChange={this.onChange}
                 />
                 <Button color="dark" style={{ marginTop: '2rem' }} block>
-                  Add Item
+                  Point Story
                 </Button>
               </FormGroup>
             </Form>

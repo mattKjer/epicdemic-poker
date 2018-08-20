@@ -6,16 +6,17 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  items: [],
+  items: {},
   loading: false
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_POINTS:
+      //The mongoose api returns an array, I want this to be input into state as an object. 
       return {
         ...state,
-        items: action.payload,
+        items: action.payload[0],
         loading: false
       };
     case DELETE_ITEM:

@@ -9,39 +9,38 @@ import socketIOClient from 'socket.io-client'
 
 class ShoppingList extends Component {
   componentDidMount() {
-    this.props.getPoints();
+    this.props.getPoints('dopesquad');
   }
-
+  
   onDeleteClick = id => {
     this.props.deleteItem(id);
   };
-
+  
   render() {
-
+    
+    const {teamName, totalPoints, points} = this.props.item.items;
     const socket = socketIOClient("http://localhost:5000");
     socket.on('connect', () => {console.log('I connected on client')});
     socket.on('updatePoints', () => {
-      console.log('fetching items from shopping list');
-      this.props.getItems();
+      this.props.getPoints('dopesquad');
     });
 
-    const { items } = this.props.item;
     return (
       <Container>
         <ListGroup>
           <TransitionGroup className="shopping-list">
-            {items.map(({ _id, name }) => (
-              <CSSTransition key={_id} timeout={500} classNames="fade">
+            {points && points.map(point => (
+              <CSSTransition key={point._id} timeout={500} classNames="fade">
                 <ListGroupItem>
-                  <Button
+                  {/* <Button
                     className="remove-btn"
                     color="danger"
                     size="sm"
-                    onClick={this.onDeleteClick.bind(this, _id)}
+                    onClick={this.onDeleteClick.bind(this, point._id)}
                   >
                     &times;
-                  </Button>
-                  {name}
+                  </Button> */}
+                  {point.point}
                 </ListGroupItem>
               </CSSTransition>
             ))}
