@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     .then(points => res.json(points));
 });
 
-// @route   GET api/points/:teamname
+// @route   GET api/game/:teamname
 // @desc    Get All Points for a specific game
 // @access  Public
 router.get('/:id', (req, res) => {
@@ -21,9 +21,9 @@ router.get('/:id', (req, res) => {
 });
 
 // @route   POST api/game/:teamname
-// @desc    Get All Points for a specific game
+// @desc    Create a new Game
 // @access  Public
-router.post('/:id', (req, res) => {
+router.post('/', (req, res) => {
   const newGame = new Game({
     teamName: req.params.id
   });
@@ -32,19 +32,19 @@ router.post('/:id', (req, res) => {
 });
 
 // @route   POST api/game/point/
-// @desc    Create An Point
+// @desc    Create A Point
 // @access  Public
 router.post('/point', (req, res) => {
-  Game.findById('5b79600a4654dd0ee4f21bf6')
+  Game.findById('5b7aa7f3425140321d6daa29')
     .then(game => {
       let newSubPoint = new Point({
         point: req.body.points
       });
       game.points.push(newSubPoint);
       game.save(function (err) {
-            console.log(err) // #sadpanda
+          if(err) return res.status(500).send('there was a problem saving the point to the database', err);
+          return res.json(game)
           });
-      return res.json(item)
         }
       )
     .catch(err => res.status(404).json({ success: false, error: err })); 
@@ -54,7 +54,7 @@ router.post('/point', (req, res) => {
 // @desc    Update a Point
 // @access  Public
 router.put('/point/:id', (req, res) => {
-  Game.findById('5b79600a4654dd0ee4f21bf6')
+  Game.findById('5b7aa7f3425140321d6daa29')
     .then(game => {
       const subDoc = game.points.id('5b797761bf2ef11ad1a66e3b');
       subDoc.point = 45;
@@ -65,7 +65,7 @@ router.put('/point/:id', (req, res) => {
 
       game.totalPoints = total;
       game.save(function (err) {
-        console.log(err) // #sadpanda
+        if(err) return res.status(500).send('there was a problem saving the point to the database', err);
       });
     })
     .then(() => res.json({ success: true }))
