@@ -19,7 +19,9 @@ class App extends Component {
           <AppNavbar />
           <Container>
             
-            <ItemModal />
+            <ItemModal buttonTitle="Point" />
+            <ItemModal buttonTitle="Join Game" />
+            <ItemModal buttonTitle="Point" />
             <ShoppingList />
           </Container>
         </div>

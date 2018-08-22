@@ -9,9 +9,10 @@ const crispy = "5b7b08f490d0184c610c6987";
 const {Games, Point} = require('../../models/Game');
 
 const calculateTotalPoints = (game) => {
-  return total = game.points
-                    .filter(e => e.point >=0)
-                    .reduce((accumulator, amount) => accumulator + amount.point, 0);
+  return total = 
+    game.points
+    .filter(e => e.point >=0)
+    .reduce((accumulator, amount) => accumulator + amount.point, 0);
 };
 
 // @route   GET api/games
@@ -39,7 +40,7 @@ router.post('/', (req, res) => {
 // @desc    Get game status for specific game
 // @access  Public
 router.get('/:teamName', (req, res) => {
-  Games.find({teamName: req.params.teamName})
+  Games.findOne({teamName: req.params.teamName})
     .then(game => res.json(game));
 });
 
@@ -48,7 +49,7 @@ router.get('/:teamName', (req, res) => {
 // @access  Public
 router.post('/:teamName', async (req, res) => {
     try {
-      const Game = await Games.findById(req.body.gameId);
+      const Game = await Games.findOne({teamName: req.params.teamName});
       const newPoint = new Point({
         point: req.body.points
       });
@@ -69,7 +70,7 @@ router.post('/:teamName', async (req, res) => {
 // @access  Public
 router.put('/:teamName', async (req, res) => {
   try {
-    const game = await Games.findById(req.body.gameId);
+    const game = await Games.findOne({teamName: req.params.teamName});
     const subDoc = game.points.id(req.body.pointId);
     subDoc.point = req.body.points;
 

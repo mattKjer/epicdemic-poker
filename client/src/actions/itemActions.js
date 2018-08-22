@@ -8,7 +8,7 @@ const socket = socketIOClient("http://localhost:5000");
 
 export const getPoints = (teamName = '') => dispatch => {
   dispatch(setItemsLoading());
-  axios.get(`/api/game/${teamName}`).then(res =>
+  axios.get(`/api/games/${teamName}`).then(res =>
     dispatch({
       type: GET_POINTS,
       payload: res.data
@@ -16,8 +16,8 @@ export const getPoints = (teamName = '') => dispatch => {
   );
 };
 
-export const addItem = item => dispatch => {
-  axios.post('/api/game/point', item).then(res =>
+export const addItem = game => dispatch => {
+  axios.post(`/api/games/${game.teamName}`, game).then(res =>
     dispatch({
       type: ADD_ITEM,
       payload: res.data

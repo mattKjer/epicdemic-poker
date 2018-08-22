@@ -17,8 +17,7 @@ class ShoppingList extends Component {
   };
   
   render() {
-    
-    const {teamName, totalPoints, points} = this.props.item.items;
+    const {teamName, totalPoints, points} = this.props.game;
     const socket = socketIOClient("http://localhost:5000");
     socket.on('connect', () => {console.log('I connected on client')});
     socket.on('updatePoints', () => {
@@ -28,6 +27,7 @@ class ShoppingList extends Component {
     return (
       <Container>
         {totalPoints && `Total points: ${totalPoints}`}
+        {teamName && `Game: ${teamName}`}
         <ListGroup>
           <TransitionGroup className="shopping-list">
             {points && points.map(point => (
@@ -54,11 +54,11 @@ class ShoppingList extends Component {
 
 ShoppingList.propTypes = {
   getPoints: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
+  game: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  item: state.item
+  game: state.games.game
 });
 
 export default connect(

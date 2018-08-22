@@ -6,7 +6,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  items: {},
+  game: {},
   loading: false
 };
 
@@ -16,18 +16,19 @@ export default function(state = initialState, action) {
       //The mongoose api returns an array, I want this to be input into state as an object. 
       return {
         ...state,
-        items: action.payload[0],
+        game: action.payload,
         loading: false
       };
     case DELETE_ITEM:
       return {
         ...state,
-        items: state.items.filter(item => item._id !== action.payload)
+        game: state.items.filter(item => item._id !== action.payload)
       };
     case ADD_ITEM:
+      console.log(action.payload);
       return {
         ...state,
-        items: [action.payload, ...state.items]
+        game: [action.payload, ...state.game]
       };
     case ITEMS_LOADING:
       return {
