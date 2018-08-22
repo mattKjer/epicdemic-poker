@@ -33,7 +33,7 @@ class ItemModal extends Component {
 
     const newItem = {
       points: this.state.points,
-      teamName: this.props.item.items.teamName
+      teamName: this.props.game.teamName
     };
 
     // Add item via addItem action
@@ -80,7 +80,7 @@ class ItemModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  item: state.game
+  game: state.games.game
 });
 
 export default connect(

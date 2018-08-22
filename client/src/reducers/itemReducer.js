@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   game: {},
+  userPointId: '',
   loading: false
 };
 
@@ -25,10 +26,9 @@ export default function(state = initialState, action) {
         game: state.items.filter(item => item._id !== action.payload)
       };
     case ADD_ITEM:
-      console.log(action.payload);
       return {
         ...state,
-        game: [action.payload, ...state.game]
+        userPointId: action.payload._id
       };
     case ITEMS_LOADING:
       return {
