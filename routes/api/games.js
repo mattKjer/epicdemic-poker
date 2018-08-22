@@ -8,6 +8,12 @@ const crispy = "5b7b08f490d0184c610c6987";
 // Game Model
 const {Games, Point} = require('../../models/Game');
 
+const calculateTotalPoints = (game) => {
+  return total = game.points
+                    .filter(e => e.point >=0)
+                    .reduce((accumulator, amount) => accumulator + amount.point, 0);
+};
+
 // @route   GET api/games
 // @desc    Get All Games
 // @access  Public
@@ -47,10 +53,9 @@ router.post('/:teamName', (req, res) => {
         point: req.body.points
       });
       game.points.push(newSubPoint);
-      const total = game.points
-                    .filter(e => e.point >=0)
-                    .reduce((accumulator, amount) => accumulator + amount.point, 0);
-      game.totalPoints = total;
+      
+      game.totalPoints = calculateTotalPoints(game);
+
       game.save(function (err) {
           if(err) return res.status(500).send('there was a problem saving the point to the database', err);
           return res.json(game)
@@ -69,11 +74,8 @@ router.put('/:teamName', (req, res) => {
       const subDoc = game.points.id(req.body.pointId);
       subDoc.point = req.body.points;
 
-      const total = game.points
-                    .filter(e => e.point >=0)
-                    .reduce((accumulator, amount) => accumulator + amount.point, 0);
+      game.totalPoints = calculateTotalPoints(game);
 
-      game.totalPoints = total;
       game.save(function (err) {
         if(err) return res.status(500).send('there was a problem saving the point to the database', err);
         return res.json(game);
