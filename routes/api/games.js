@@ -46,42 +46,41 @@ router.get('/:teamName', (req, res) => {
 // @route   POST api/games/:teamName
 // @desc    Create A Point
 // @access  Public
-router.post('/:teamName', (req, res) => {
-  Games.findById(req.body.gameId)
-    .then(game => {
-      let newSubPoint = new Point({
+router.post('/:teamName', async (req, res) => {
+    try {
+      const Game = await Games.findById(req.body.gameId);
+      const newPoint = new Point({
         point: req.body.points
       });
-      game.points.push(newSubPoint);
-      
-      game.totalPoints = calculateTotalPoints(game);
 
-      game.save(function (err) {
-          if(err) return res.status(500).send('there was a problem saving the point to the database', err);
-          return res.json(game)
-          });
-        }
-      )
-    .catch(err => res.status(404).json({ success: false, error: err })); 
+      Game.points.push(newPoint);
+      Game.totalPoints = calculateTotalPoints(Game);
+
+      const updatedGame = await Game.save();
+      return res.json(updatedGame);
+    }
+    catch (err) { 
+      res.status(404).json({ success: false, error: err });
+    }
 });
 
 // @route   PUT api/games/:teamName
 // @desc    Update a Point
 // @access  Public
-router.put('/:teamName', (req, res) => {
-  Games.findById(req.body.gameId)
-    .then(game => {
-      const subDoc = game.points.id(req.body.pointId);
-      subDoc.point = req.body.points;
+router.put('/:teamName', async (req, res) => {
+  try {
+    const game = await Games.findById(req.body.gameId);
+    const subDoc = game.points.id(req.body.pointId);
+    subDoc.point = req.body.points;
 
-      game.totalPoints = calculateTotalPoints(game);
+    game.totalPoints = calculateTotalPoints(game);
 
-      game.save(function (err) {
-        if(err) return res.status(500).send('there was a problem saving the point to the database', err);
-        return res.json(game);
-      });
-    })
-    .catch(err => res.status(404).json({ success: false, error: err }));
+    const updatedGame = await game.save();
+    return res.json(updatedGame);
+  }
+  catch (err) { 
+    res.status(404).json({ success: false, error: err });
+  }
 });
 
 module.exports = router;
