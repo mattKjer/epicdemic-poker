@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const items = require('./routes/api/items');
-const game= require('./routes/api/game');
+const games= require('./routes/api/games');
 
 const app = express();
 
@@ -33,7 +33,7 @@ mongoose
 // Anything routed to /api/items will use this path and the items object passed into it.
 // you can also use app.use('/api/points', points)
 app.use('/api/items', items);
-app.use('/api/game', game);
+app.use('/api/games', games);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

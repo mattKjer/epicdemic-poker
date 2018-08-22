@@ -6,29 +6,42 @@ const dopesquad = "5b7b125be18acb5296675f2b";
 const crispy = "5b7b08f490d0184c610c6987";
 
 // Game Model
-const {Game, Point} = require('../../models/Game');
+const {Games, Point} = require('../../models/Game');
 
-// @route   GET api/game
+// @route   GET api/games
 // @desc    Get All Games
 // @access  Public
 router.get('/', (req, res) => {
-  Game.find()
-    .then(points => res.json(points));
+  Games.find()
+    .then(game => res.json(game));
 });
 
-// @route   GET api/game/:teamname
-// @desc    Get All Points for a specific game
+// @route   POST api/games/
+// @desc    Create a new Game
 // @access  Public
-router.get('/:id', (req, res) => {
-  Game.find({teamName: req.params.id})
-    .then(points => res.json(points));
+router.post('/', (req, res) => {
+  const newGame = new Games({
+    teamName: req.body.teamName
+  });
+  newGame.save()
+  .then(game => res.json(game))
+  .catch(err => res.status(404).json({ success: false, error: err }));;
 });
 
-// @route   POST api/game/point/
+
+// @route   GET api/games/:teamname
+// @desc    Get game status for specific game
+// @access  Public
+router.get('/:teamName', (req, res) => {
+  Games.find({teamName: req.params.teamName})
+    .then(game => res.json(game));
+});
+
+// @route   POST api/games/:teamName
 // @desc    Create A Point
 // @access  Public
-router.post('/point', (req, res) => {
-  Game.findById(dopesquad)
+router.post('/:teamName', (req, res) => {
+  Games.findById(req.body.gameId)
     .then(game => {
       let newSubPoint = new Point({
         point: req.body.points
@@ -47,25 +60,13 @@ router.post('/point', (req, res) => {
     .catch(err => res.status(404).json({ success: false, error: err })); 
 });
 
-// @route   POST api/game/:teamname
-// @desc    Create a new Game
-// @access  Public
-router.post('/:id', (req, res) => {
-  const newGame = new Game({
-    teamName: req.params.id
-  });
-  newGame.save().then(game => res.json(game))
-  .catch(err => res.status(404).json({ success: false, error: err }));;
-});
-
-
-// @route   PUT api/game/point/:id
+// @route   PUT api/games/:teamName
 // @desc    Update a Point
 // @access  Public
-router.put('/point/:id', (req, res) => {
-  Game.findById(dopesquad)
+router.put('/:teamName', (req, res) => {
+  Games.findById(req.body.gameId)
     .then(game => {
-      const subDoc = game.points.id('5b7b09c68044d84c8e283592');
+      const subDoc = game.points.id(req.body.pointId);
       subDoc.point = req.body.points;
 
       const total = game.points
@@ -75,9 +76,9 @@ router.put('/point/:id', (req, res) => {
       game.totalPoints = total;
       game.save(function (err) {
         if(err) return res.status(500).send('there was a problem saving the point to the database', err);
+        return res.json(game);
       });
     })
-    .then((game) => res.json(game))
     .catch(err => res.status(404).json({ success: false, error: err }));
 });
 

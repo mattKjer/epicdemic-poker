@@ -15,7 +15,7 @@ const gameSchema = new Schema({
 module.exports = Game = mongoose.model('game', gameSchema);
 
 module.exports = {
-  Game: mongoose.model('game', gameSchema),
+  Games: mongoose.model('game', gameSchema),
   Point:  mongoose.model('point', pointSchema)
 }
 
