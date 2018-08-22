@@ -1,13 +1,17 @@
 import {
   GET_POINTS,
   ADD_ITEM,
+  UPDATE_POINT,
   DELETE_ITEM,
   ITEMS_LOADING
 } from '../actions/types';
 
 const initialState = {
   game: {},
-  userPointId: '',
+  userPoint: {
+    point: 0,
+    id: ''
+  },
   loading: false
 };
 
@@ -28,7 +32,12 @@ export default function(state = initialState, action) {
     case ADD_ITEM:
       return {
         ...state,
-        userPointId: action.payload._id
+        userPoint: {...action.payload}
+      };
+    case UPDATE_POINT:
+      return {
+        ...state,
+        userPoint: action.payload
       };
     case ITEMS_LOADING:
       return {

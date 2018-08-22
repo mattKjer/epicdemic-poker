@@ -10,7 +10,7 @@ import {
   Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addItem } from '../actions/itemActions';
+import { addItem, updatePoint } from '../actions/itemActions';
 
 class ItemModal extends Component {
   state = {
@@ -33,11 +33,15 @@ class ItemModal extends Component {
 
     const newItem = {
       points: this.state.points,
-      teamName: this.props.game.teamName
+      teamName: this.props.game.teamName,
+      pointId: this.props.userPoint._id
     };
 
-    // Add item via addItem action
-    this.props.addItem(newItem);
+    if(this.props.userPoint.id === '') {
+      this.props.addItem(newItem);
+    } else {
+      this.props.updatePoint(newItem);
+    }
 
     // Close modal
     this.toggle();
@@ -80,10 +84,11 @@ class ItemModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  game: state.games.game
+  game: state.games.game,
+  userPoint: state.games.userPoint
 });
 
 export default connect(
   mapStateToProps,
-  { addItem }
+  { addItem, updatePoint }
 )(ItemModal);

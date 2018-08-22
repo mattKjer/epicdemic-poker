@@ -77,7 +77,7 @@ router.put('/:teamName', async (req, res) => {
     game.totalPoints = calculateTotalPoints(game);
 
     const updatedGame = await game.save();
-    return res.json(updatedGame);
+    return res.json(subDoc);
   }
   catch (err) { 
     res.status(404).json({ success: false, error: err });
