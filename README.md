@@ -1,6 +1,7 @@
-# MERN Shopping List
+# Epidemic technical test
 
-> Shopping list app built with the MERN stack along with Redux for state management, Reactstrap and react-transition-group.
+> A planning poker app built to support real time updates across multiple clients.
+Technologies include React, Redux, MongoDB, Mongoose, SocketIo.
 
 ## Quick Start
 
@@ -23,14 +24,21 @@ npm run client
 # Server runs on http://localhost:5000 and client on http://localhost:3000
 ```
 
-## Deployment
-
-There is a Heroku post build script so that you do not have to compile your React frontend manually, it is done on the server. Simply push to Heroku and it will build and load the client index.html page
 
 ## App Info
 
-### Author
+###Improvements
+Unit tests with Enzyme and Jest. \
+Development of the front end to reflect photoshop prototype. \
+Implemention of ducks structure for app scalability. \
+Reset points feature. \
+Account log in / Oauth
 
+
+### Author
+Matthew Kiernander
+
+Bootstrap template by:
 Brad Traversy
 [Traversy Media](http://www.traversymedia.com)
 
