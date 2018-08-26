@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AppNavbar from './components/AppNavbar';
+import AppNavbar from './components/AppNavBar/AppNavbar';
 import JoinGameModalContainer from './redux/containers/JoinGameModalContainer';
 import CreateGameModalContainer from './redux/containers/CreateGameModalContainer';
 import PointModalContainer from './redux/containers/PointModalContainer';

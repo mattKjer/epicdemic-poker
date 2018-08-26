@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import socketIOClient from 'socket.io-client'
 
-class ShoppingList extends Component {
+class Game extends Component {
   
   render() {
     const socket = socketIOClient("http://localhost:5000");
@@ -34,7 +34,7 @@ class ShoppingList extends Component {
   }
 }
 
-ShoppingList.propTypes = {
+Game.propTypes = {
   getGame: PropTypes.func.isRequired,
   teamName: PropTypes.string,
   totalPoints: PropTypes.number,
@@ -42,4 +42,4 @@ ShoppingList.propTypes = {
 };
 
 
-export default ShoppingList;
+export default Game;

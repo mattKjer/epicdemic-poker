@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const items = require('./routes/api/items');
 const games= require('./routes/api/games');
 
 const app = express();

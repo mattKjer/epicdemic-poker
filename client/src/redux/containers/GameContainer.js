@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ShoppingList from '../../components/ShoppingList';
+import Game from '../../components/Modals/Game/Game';
 import { getGame } from '../actions/GameActions';
 
 const mapStateToProps = state => ({
@@ -17,6 +17,6 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-const GameContainer = connect(mapStateToProps, mapDispatchToProps)(ShoppingList);
+const GameContainer = connect(mapStateToProps, mapDispatchToProps)(Game);
 
 export default GameContainer;

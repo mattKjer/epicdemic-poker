@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PointModal from '../../components/PointModal';
+import PointModal from '../../components/Modals/PointModal/PointModal';
 import { createPoint, updatePoint } from '../actions/GameActions';
 
 const mapStateToProps = state => ({

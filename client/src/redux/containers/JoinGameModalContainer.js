@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import JoinGameModal from '../../components/JoinGameModal';
+import JoinGameModal from '../../components/Modals/JoinGameModal/JoinGameModal';
 import { getGame } from '../actions/GameActions';
 
 const mapDispatchToProps = dispatch =>
