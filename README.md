@@ -27,7 +27,7 @@ npm run client
 
 ## App Info
 
-###Improvements
+### Improvements
 Unit tests with Enzyme and Jest. \
 Development of the front end to reflect photoshop prototype. \
 Implemention of ducks structure for app scalability. \
