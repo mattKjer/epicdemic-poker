@@ -5,8 +5,7 @@ import {
   ModalHeader,
   ModalBody,
   Form,
-  FormGroup,
-  Label,
+  FormGroup
 } from 'reactstrap';
 import axios from 'axios';
 import Select from 'react-select';
@@ -19,13 +18,17 @@ class JoinGameModal extends Component {
     selectedGame: ""
   };
 
-  componentDidMount() {
+  getGameNames = () => {
     axios.get(`/api/games/`)
     .then(res => {
       const formattedGameNames = res.data.map(teamName => {
         return { value: teamName, label: teamName}
       });
       this.setState({gameNames: formattedGameNames})});
+  }
+
+  componentDidMount() {
+    this.getGameNames();
   }
 
   toggle = () => {
@@ -41,7 +44,7 @@ class JoinGameModal extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    this.props.getPoints(this.state.selectedGame);
+    this.props.getGame(this.state.selectedGame);
 
     // Close modal
     this.toggle();
@@ -63,7 +66,6 @@ class JoinGameModal extends Component {
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="item">Point</Label>
                 <Select 
                   options={this.state.gameNames} 
                   onChange={this.onChange}
@@ -83,7 +85,7 @@ class JoinGameModal extends Component {
 }
 
 JoinGameModal.propTypes = {
-  getPoints: PropTypes.func.isRequired,
+  getGame: PropTypes.func.isRequired,
 };
 
 export default JoinGameModal;

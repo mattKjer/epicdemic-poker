@@ -6,16 +6,14 @@ import {
   ModalBody,
   Form,
   FormGroup,
-  Label,
-  Input
+  Input,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-
-class ItemModal extends Component {
+class CreateGameModal extends Component {
   state = {
     modal: false,
-    points: 0
+    teamName: " "
   };
 
   toggle = () => {
@@ -31,18 +29,13 @@ class ItemModal extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const newPoint = {
-      points: this.state.points,
-      teamName: this.props.teamName,
-      pointId: this.props.userPoint._id
+    const newGame = {
+      teamName : this.state.teamName
     };
-    
-    if(newPoint.pointId === "") {
-      this.props.createPoint(newPoint);
-    } else {
-      this.props.updatePoint(newPoint);
-    }
+    console.log('​CreateGameModal -> newGame', newGame);
 
+    this.props.createGame(newGame);
+    
     // Close modal
     this.toggle();
   };
@@ -55,24 +48,23 @@ class ItemModal extends Component {
           style={{ marginBottom: '2rem' }}
           onClick={this.toggle}
         >
-          Point
+          Create Game
         </Button>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Point Story</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Create a new game</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="item">Point</Label>
                 <Input
-                  type="text"
-                  name="points"
-                  id="points"
-                  placeholder="Add or update point"
-                  onChange={this.onChange}
-                />
+                    type="text"
+                    name="teamName"
+                    id="teamName"
+                    placeholder="input a team name"
+                    onChange={this.onChange}
+                  />
                 <Button color="dark" style={{ marginTop: '2rem' }} block>
-                  Point Story
+                  Create Game
                 </Button>
               </FormGroup>
             </Form>
@@ -83,11 +75,9 @@ class ItemModal extends Component {
   }
 }
 
-ItemModal.propTypes = {
-  userPoint: PropTypes.object.isRequired,
-  createPoint: PropTypes.func.isRequired,
-  updatePoint: PropTypes.func.isRequired,
-  teamName: PropTypes.string.isRequired
-}
+CreateGameModal.propTypes = {
+  createGame: PropTypes.func.isRequired
+};
 
-export default ItemModal;
+export default CreateGameModal;
+

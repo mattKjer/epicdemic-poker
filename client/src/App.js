@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import AppNavbar from './components/AppNavbar';
-import ShoppingList from './components/ShoppingList';
-import ItemModal from './components/ItemModal';
 import JoinGameModalContainer from './redux/containers/JoinGameModalContainer';
+import CreateGameModalContainer from './redux/containers/CreateGameModalContainer';
+import PointModalContainer from './redux/containers/PointModalContainer';
+import GameContainer from './redux/containers/GameContainer';
 import { Container } from 'reactstrap';
 
 import { Provider } from 'react-redux';
@@ -20,10 +21,10 @@ class App extends Component {
           <AppNavbar />
           <Container>
             
-            <ItemModal buttonTitle="Point" />
             <JoinGameModalContainer />
-            <ItemModal buttonTitle="Point" />
-            <ShoppingList />
+            <CreateGameModalContainer />
+            <PointModalContainer />
+            <GameContainer />
           </Container>
         </div>
       </Provider>

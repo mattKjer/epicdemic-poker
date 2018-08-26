@@ -1,45 +1,28 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { Container, ListGroup, ListGroupItem } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { connect } from 'react-redux';
-import { getPoints, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
 import socketIOClient from 'socket.io-client'
 
 class ShoppingList extends Component {
-  componentDidMount() {
-  }
-  
-  onDeleteClick = id => {
-    this.props.deleteItem(id);
-  };
   
   render() {
-    const {teamName, totalPoints, points} = this.props.game;
     const socket = socketIOClient("http://localhost:5000");
     socket.on('connect', () => {console.log('I connected on client')});
     socket.on('updatePoints', () => {
-      this.props.getPoints('dopesquad');
+      this.props.getGame(this.props.teamName);
     });
 
     return (
       <Container>
-        {totalPoints && `Total points: ${totalPoints}`}
-        {teamName && `Game: ${teamName}`}
+        {this.props.totalPoints && `Total points: ${this.props.totalPoints}`}
+        {this.props.teamName && `Game: ${this.props.teamName}`}
         <ListGroup>
           <TransitionGroup className="shopping-list">
-            {points && points.map(point => (
+            {this.props.points && this.props.points.map(point => (
               <CSSTransition key={point._id} timeout={500} classNames="fade">
                 <ListGroupItem>
-                  {/* <Button
-                    className="remove-btn"
-                    color="danger"
-                    size="sm"
-                    onClick={this.onDeleteClick.bind(this, point._id)}
-                  >
-                    &times;
-                  </Button> */}
                   {point.point}
                 </ListGroupItem>
               </CSSTransition>
@@ -52,15 +35,11 @@ class ShoppingList extends Component {
 }
 
 ShoppingList.propTypes = {
-  getPoints: PropTypes.func.isRequired,
-  game: PropTypes.object.isRequired
+  getGame: PropTypes.func.isRequired,
+  teamName: PropTypes.string,
+  totalPoints: PropTypes.number,
+  points: PropTypes.array
 };
 
-const mapStateToProps = state => ({
-  game: state.games.game
-});
 
-export default connect(
-  mapStateToProps,
-  { getPoints, deleteItem }
-)(ShoppingList);
+export default ShoppingList;

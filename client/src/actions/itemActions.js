@@ -1,24 +1,33 @@
 import axios from 'axios';
-import { GET_POINTS, ADD_ITEM, UPDATE_POINT, DELETE_ITEM, ITEMS_LOADING } from './types';
+import { GET_GAME,CREATE_GAME, CREATE_POINT, UPDATE_POINT, DELETE_ITEM, ITEMS_LOADING } from './types';
 
 import socketIOClient from 'socket.io-client';
 
 const socket = socketIOClient("http://localhost:5000");
 
-export const getPoints = (teamName = '') => dispatch => {
+export const getGame = teamName => dispatch => {
   dispatch(setItemsLoading());
   axios.get(`/api/games/${teamName}`).then(res =>
     dispatch({
-      type: GET_POINTS,
+      type: GET_GAME,
       payload: res.data
     })
   );
 };
 
-export const addItem = game => dispatch => {
+export const createGame = game => dispatch => {
+  axios.post(`/api/games/`, game).then(res =>
+    dispatch({
+      type: CREATE_GAME,
+      payload: res.data
+    })
+  );
+};
+
+export const createPoint = game => dispatch => {
   axios.post(`/api/games/${game.teamName}`, game).then(res =>
     dispatch({
-      type: ADD_ITEM,
+      type: CREATE_POINT,
       payload: res.data
     })
   ).then(() => {

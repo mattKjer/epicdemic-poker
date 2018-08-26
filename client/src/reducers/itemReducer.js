@@ -1,27 +1,41 @@
 import {
-  GET_POINTS,
-  ADD_ITEM,
+  GET_GAME,
+  CREATE_GAME,
+  CREATE_POINT,
   UPDATE_POINT,
   DELETE_ITEM,
-  ITEMS_LOADING
+  ITEMS_LOADING,
 } from '../actions/types';
 
 const initialState = {
-  game: {},
+  game: {
+    teamName: '',
+    totalPoints: 0,
+    points: []
+  },
   userPoint: {
     point: 0,
-    id: ''
+    _id: ''
   },
   loading: false
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_POINTS:
-      //The mongoose api returns an array, I want this to be input into state as an object. 
+    case GET_GAME:
       return {
         ...state,
         game: action.payload,
+        loading: false
+      };
+      case CREATE_GAME:
+      return {
+        ...state,
+        game: action.payload,
+        userPoint: {
+          point: 0,
+          _id: ''
+        },
         loading: false
       };
     case DELETE_ITEM:
@@ -29,7 +43,7 @@ export default function(state = initialState, action) {
         ...state,
         game: state.items.filter(item => item._id !== action.payload)
       };
-    case ADD_ITEM:
+    case CREATE_POINT:
       return {
         ...state,
         userPoint: {...action.payload}
@@ -37,7 +51,7 @@ export default function(state = initialState, action) {
     case UPDATE_POINT:
       return {
         ...state,
-        userPoint: action.payload
+        userPoint: {...action.payload}
       };
     case ITEMS_LOADING:
       return {

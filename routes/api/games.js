@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
   });
   newGame.save()
   .then(game => res.json(game))
-  .catch(err => res.status(404).json({ success: false, error: err }));;
+  .catch(err => res.status(404).json({ success: false, error: err }));
 });
 
 
@@ -43,7 +43,8 @@ router.post('/', (req, res) => {
 // @access  Public
 router.get('/:teamName', (req, res) => {
   Games.findOne({teamName: req.params.teamName})
-    .then(game => res.json(game));
+    .then(game => res.json(game))
+    .catch(err => res.status(404).json({ success: false, error: err }));
 });
 
 // @route   POST api/games/:teamName
