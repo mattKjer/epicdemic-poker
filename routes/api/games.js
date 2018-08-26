@@ -18,9 +18,16 @@ const calculateTotalPoints = (game) => {
 // @route   GET api/games
 // @desc    Get All Games
 // @access  Public
-router.get('/', (req, res) => {
-  Games.find()
-    .then(game => res.json(game));
+router.get('/', async (req, res) => {
+  try {
+    const allGames = await Games.find();
+    const gameNames = allGames.map(game => game.teamName);
+    console.log('​gameNames', gameNames);
+    return res.json(gameNames);
+  }
+  catch (err) { 
+    res.status(404).json({ success: false, error: err });
+  }
 });
 
 // @route   POST api/games/

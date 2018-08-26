@@ -9,7 +9,7 @@ import socketIOClient from 'socket.io-client'
 
 class ShoppingList extends Component {
   componentDidMount() {
-    this.props.getPoints('dopesquad');
+    this.props.getPoints();
   }
   
   onDeleteClick = id => {

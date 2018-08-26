@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AppNavbar from './components/AppNavbar';
 import ShoppingList from './components/ShoppingList';
 import ItemModal from './components/ItemModal';
+import JoinGameModal from './components/JoinGameModal';
 import { Container } from 'reactstrap';
 
 import { Provider } from 'react-redux';
@@ -20,7 +21,7 @@ class App extends Component {
           <Container>
             
             <ItemModal buttonTitle="Point" />
-            <ItemModal buttonTitle="Join Game" />
+            <JoinGameModal buttonTitle="Join Game" />
             <ItemModal buttonTitle="Point" />
             <ShoppingList />
           </Container>
