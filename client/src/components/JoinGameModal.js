@@ -7,12 +7,9 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
 } from 'reactstrap';
 import axios from 'axios';
 import Select from 'react-select';
-import { connect } from 'react-redux';
-import { getPoints } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
 class JoinGameModal extends Component {
@@ -58,7 +55,7 @@ class JoinGameModal extends Component {
           style={{ marginBottom: '2rem' }}
           onClick={this.toggle}
         >
-          {this.props.buttonTitle}
+          Join Game
         </Button>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
@@ -89,7 +86,5 @@ JoinGameModal.propTypes = {
   getPoints: PropTypes.func.isRequired,
 };
 
-export default connect(
-  null, { getPoints }
-)(JoinGameModal);
+export default JoinGameModal;
 

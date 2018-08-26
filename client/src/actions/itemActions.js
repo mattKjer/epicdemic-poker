@@ -1,10 +1,18 @@
 import axios from 'axios';
-import { GET_POINTS, ADD_ITEM, UPDATE_POINT, DELETE_ITEM, ITEMS_LOADING } from './types';
+import { GET_POINTS, GET_GAME_NAMES, ADD_ITEM, UPDATE_POINT, DELETE_ITEM, ITEMS_LOADING } from './types';
 
 import socketIOClient from 'socket.io-client';
 
 const socket = socketIOClient("http://localhost:5000");
 
+export const getGameNames = () => dispatch => {
+  axios.get(`/api/games/`).then(res =>
+    dispatch({
+      type: GET_GAME_NAMES,
+      payload: res.data
+    })
+  );
+};
 
 export const getPoints = (teamName = '') => dispatch => {
   dispatch(setItemsLoading());
