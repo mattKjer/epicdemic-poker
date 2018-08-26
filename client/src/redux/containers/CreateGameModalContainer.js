@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import CreateGameModal from '../../components/CreateGameModal';
-import { createGame, getGame } from '../../actions/itemActions';
+import { createGame, getGame } from '../actions/GameActions';
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

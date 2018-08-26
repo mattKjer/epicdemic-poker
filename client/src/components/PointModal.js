@@ -12,7 +12,7 @@ import {
 import PropTypes from 'prop-types';
 
 
-class ItemModal extends Component {
+class PointModal extends Component {
   state = {
     modal: false,
     points: 0
@@ -83,11 +83,11 @@ class ItemModal extends Component {
   }
 }
 
-ItemModal.propTypes = {
+PointModal.propTypes = {
   userPoint: PropTypes.object.isRequired,
   createPoint: PropTypes.func.isRequired,
   updatePoint: PropTypes.func.isRequired,
   teamName: PropTypes.string.isRequired
 }
 
-export default ItemModal;
+export default PointModal;

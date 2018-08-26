@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_GAME,CREATE_GAME, CREATE_POINT, UPDATE_POINT, DELETE_ITEM, ITEMS_LOADING } from './types';
+import { GET_GAME,CREATE_GAME, CREATE_POINT, UPDATE_POINT, DELETE_ITEM, ITEMS_LOADING } from '../actiontypes/GameTypes';
 
 import socketIOClient from 'socket.io-client';
 

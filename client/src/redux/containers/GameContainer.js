@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ShoppingList from '../../components/ShoppingList';
-import { getGame } from '../../actions/itemActions';
+import { getGame } from '../actions/GameActions';
 
 const mapStateToProps = state => ({
   teamName: state.games.game.teamName,

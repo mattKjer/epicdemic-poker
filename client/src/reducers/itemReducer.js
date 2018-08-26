@@ -3,9 +3,8 @@ import {
   CREATE_GAME,
   CREATE_POINT,
   UPDATE_POINT,
-  DELETE_ITEM,
   ITEMS_LOADING,
-} from '../actions/types';
+} from '../redux/actiontypes/GameTypes';
 
 const initialState = {
   game: {
@@ -37,11 +36,6 @@ export default function(state = initialState, action) {
           _id: ''
         },
         loading: false
-      };
-    case DELETE_ITEM:
-      return {
-        ...state,
-        game: state.items.filter(item => item._id !== action.payload)
       };
     case CREATE_POINT:
       return {

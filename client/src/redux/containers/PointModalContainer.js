@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ItemModal from '../../components/ItemModal';
-import { createPoint, updatePoint } from '../../actions/itemActions';
+import PointModal from '../../components/PointModal';
+import { createPoint, updatePoint } from '../actions/GameActions';
 
 const mapStateToProps = state => ({
   userPoint: state.games.userPoint,
@@ -17,6 +17,6 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-const PointModalContainer = connect(mapStateToProps, mapDispatchToProps)(ItemModal);
+const PointModalContainer = connect(mapStateToProps, mapDispatchToProps)(PointModal);
 
 export default PointModalContainer;
