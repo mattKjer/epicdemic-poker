@@ -1,10 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// Game instance id's for testing purposes
-const dopesquad = "5b7b125be18acb5296675f2b";
-const crispy = "5b7b08f490d0184c610c6987";
-
 // Game Model
 const {Games, Point} = require('../../models/Game');
 
@@ -22,7 +18,6 @@ router.get('/', async (req, res) => {
   try {
     const allGames = await Games.find();
     const gameNames = allGames.map(game => game.teamName);
-    console.log('​gameNames', gameNames);
     return res.json(gameNames);
   }
   catch (err) { 

@@ -22,10 +22,10 @@ class JoinGameModal extends Component {
   componentDidMount() {
     axios.get(`/api/games/`)
     .then(res => {
-      const formattedGame = res.data.map(teamName => {
+      const formattedGameNames = res.data.map(teamName => {
         return { value: teamName, label: teamName}
       });
-      this.setState({gameNames: formattedGame})});
+      this.setState({gameNames: formattedGameNames})});
   }
 
   toggle = () => {
