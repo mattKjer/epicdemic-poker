@@ -31,7 +31,6 @@ mongoose
 // Use Routes
 // Anything routed to /api/items will use this path and the items object passed into it.
 // you can also use app.use('/api/points', points)
-app.use('/api/items', items);
 app.use('/api/games', games);
 
 app.use(function(req, res, next) {
