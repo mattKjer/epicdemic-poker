@@ -19,3 +19,9 @@
   opacity: 0.01;
   transition: opacity 1000ms ease-in;
 }
+
+.game-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+}

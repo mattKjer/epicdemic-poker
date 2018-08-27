@@ -20,11 +20,12 @@ class App extends Component {
         <div className="App">
           <AppNavbar />
           <Container>
-            
-            <JoinGameModalContainer />
-            <CreateGameModalContainer />
-            <PointModalContainer />
             <GameContainer />
+            <div className="game-options">
+              <JoinGameModalContainer />
+              <CreateGameModalContainer />
+              <PointModalContainer />
+            </div>
           </Container>
         </div>
       </Provider>

@@ -23,8 +23,14 @@ app.use(bodyParser.json());
 const db = require('./config/keys').mongoURI;
 
 // Connect to Mongo
+const options = {
+    server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+    replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+    useNewUrlParser: true
+};
+
 mongoose
-  .connect(db, { useNewUrlParser: true })
+  .connect(db, options)
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
