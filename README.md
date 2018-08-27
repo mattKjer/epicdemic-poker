@@ -32,7 +32,9 @@ Unit tests with Enzyme and Jest. \
 Development of the front end to reflect photoshop prototype. \
 Implemention of ducks structure for app scalability. \
 Reset points feature. \
-Account log in / Oauth
+Account log in / Oauth \
+Server side and client side validation \
+Proper error handling
 
 
 ### Author
