@@ -25,11 +25,11 @@ class JoinGameModal extends Component {
         return { value: teamName, label: teamName}
       });
       this.setState({gameNames: formattedGameNames})});
-  }
+  };
 
   componentDidMount() {
     this.getGameNames();
-  }
+  };
 
   toggle = () => {
     this.setState({
@@ -44,7 +44,7 @@ class JoinGameModal extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    this.props.getGame(this.state.selectedGame);
+    this.props.joinGame(this.state.selectedGame);
 
     // Close modal
     this.toggle();
@@ -85,7 +85,7 @@ class JoinGameModal extends Component {
 }
 
 JoinGameModal.propTypes = {
-  getGame: PropTypes.func.isRequired,
+  joinGame: PropTypes.func.isRequired
 };
 
 export default JoinGameModal;

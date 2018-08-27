@@ -1,5 +1,6 @@
 import {
     GET_GAME,
+    JOIN_GAME,
     CREATE_GAME,
     CREATE_POINT,
     UPDATE_POINT,
@@ -25,6 +26,16 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 game: action.payload,
+                loading: false
+            };
+        case JOIN_GAME:
+            return {
+                ...state,
+                game: action.payload,
+                userPoint: {
+                    point: 0,
+                    _id: ''
+                },
                 loading: false
             };
         case CREATE_GAME:

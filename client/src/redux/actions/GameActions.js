@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_GAME,CREATE_GAME, CREATE_POINT, UPDATE_POINT, DELETE_ITEM, ITEMS_LOADING } from '../actiontypes/GameTypes';
+import { GET_GAME, JOIN_GAME, CREATE_GAME, CREATE_POINT, UPDATE_POINT, ITEMS_LOADING } from '../actiontypes/GameTypes';
 
 import socketIOClient from 'socket.io-client';
 
@@ -13,6 +13,16 @@ export const getGame = teamName => dispatch => {
       payload: res.data
     })
   );
+};
+
+export const joinGame = teamName => dispatch => {
+    dispatch(setItemsLoading());
+    axios.get(`/api/games/${teamName}`).then(res =>
+        dispatch({
+            type: JOIN_GAME,
+            payload: res.data
+        })
+    );
 };
 
 export const createGame = game => dispatch => {
@@ -40,17 +50,6 @@ export const updatePoint = game => dispatch => {
     dispatch({
       type: UPDATE_POINT,
       payload: res.data
-    })
-  ).then(() => {
-    socket.emit('pointsUpdated');
-  });
-};
-
-export const deleteItem = id => dispatch => {
-  axios.delete(`/api/items/${id}`).then(res =>
-    dispatch({
-      type: DELETE_ITEM,
-      payload: id
     })
   ).then(() => {
     socket.emit('pointsUpdated');

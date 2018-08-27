@@ -6,7 +6,6 @@ import {
   ModalBody,
   Form,
   FormGroup,
-  Label,
   Input
 } from 'reactstrap';
 import PropTypes from 'prop-types';
@@ -63,7 +62,6 @@ class PointModal extends Component {
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="item">Point</Label>
                 <Input
                   type="text"
                   name="points"
